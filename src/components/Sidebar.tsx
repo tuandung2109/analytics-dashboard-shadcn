@@ -1,12 +1,15 @@
 import { useState } from 'react';
 import type { SidebarProps } from '@/types';
 import { cn } from '@/lib/utils';
+import { useNavigation } from '@/contexts/NavigationContext';
 
 export function Sidebar({ menuItems, activeItem: initialActiveItem, onItemClick }: SidebarProps) {
-  const [activeItem, setActiveItem] = useState(initialActiveItem || menuItems[0]?.id);
+  const { currentPage, setCurrentPage } = useNavigation();
+  const [activeItem, setActiveItem] = useState(initialActiveItem || currentPage);
 
   const handleItemClick = (id: string) => {
     setActiveItem(id);
+    setCurrentPage(id as any);
     onItemClick?.(id);
   };
 
@@ -22,7 +25,7 @@ export function Sidebar({ menuItems, activeItem: initialActiveItem, onItemClick 
         <nav className="flex-1 space-y-1 p-4">
           {menuItems.map((item) => {
             const Icon = item.icon;
-            const isActive = activeItem === item.id;
+            const isActive = currentPage === item.id;
 
             return (
               <button

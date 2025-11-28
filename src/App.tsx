@@ -1,10 +1,33 @@
+import { NavigationProvider, useNavigation } from './contexts/NavigationContext';
 import { Dashboard } from './components/Dashboard';
+import { Analytics } from './components/Analytics';
+
+function AppContent() {
+  const { currentPage } = useNavigation();
+
+  const renderPage = () => {
+    switch (currentPage) {
+      case 'dashboard':
+        return <Dashboard />;
+      case 'analytics':
+        return <Analytics />;
+      case 'reports':
+        return <Dashboard />; // Placeholder
+      case 'settings':
+        return <Dashboard />; // Placeholder
+      default:
+        return <Analytics />;
+    }
+  };
+
+  return <div className="dark">{renderPage()}</div>;
+}
 
 function App() {
   return (
-    <div className="dark">
-      <Dashboard />
-    </div>
+    <NavigationProvider>
+      <AppContent />
+    </NavigationProvider>
   );
 }
 
