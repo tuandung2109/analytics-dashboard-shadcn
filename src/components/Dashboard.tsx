@@ -32,6 +32,9 @@ import {
   Tablet,
 } from 'lucide-react';
 import { sampleMenuItems } from '@/lib/sampleData';
+import { Canvas } from '@react-three/fiber';
+import { Suspense } from 'react';
+import ParticleSystem from './ParticleBackground';
 
 export function Dashboard() {
   // Enhanced stats with new metrics
@@ -130,10 +133,19 @@ export function Dashboard() {
   ];
 
   return (
-    <div className="flex min-h-screen bg-background">
+    <div className="flex min-h-screen bg-background relative">
+      {/* 3D Particle Background */}
+      <div className="fixed inset-0 z-0 pointer-events-none">
+        <Canvas camera={{ position: [0, 0, 10], fov: 75 }}>
+          <Suspense fallback={null}>
+            <ParticleSystem />
+          </Suspense>
+        </Canvas>
+      </div>
+
       <Sidebar menuItems={sampleMenuItems} />
 
-      <div className="flex-1 pl-64">
+      <div className="flex-1 pl-64 relative z-10">
         <Header
           title="Dashboard Overview"
           subtitle="Real-time insights and performance metrics"
