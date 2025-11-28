@@ -1,6 +1,6 @@
 import { useRef, useMemo, useState } from 'react';
 import { useFrame } from '@react-three/fiber';
-import { Sphere, Line, QuadraticBezierLine } from '@react-three/drei';
+import { Sphere, QuadraticBezierLine } from '@react-three/drei';
 import * as THREE from 'three';
 
 interface AttackNode {

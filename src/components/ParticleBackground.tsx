@@ -88,22 +88,15 @@ function ParticleBackground({ count = 1000 }: ParticleBackgroundProps) {
     points.current.geometry.attributes.position.needsUpdate = true;
   });
 
+  const geometry = useMemo(() => {
+    const geo = new THREE.BufferGeometry();
+    geo.setAttribute('position', new THREE.BufferAttribute(particlesPosition, 3));
+    geo.setAttribute('color', new THREE.BufferAttribute(particlesColor, 3));
+    return geo;
+  }, [particlesPosition, particlesColor]);
+
   return (
-    <points ref={points}>
-      <bufferGeometry>
-        <bufferAttribute
-          attach="attributes-position"
-          count={count}
-          array={particlesPosition}
-          itemSize={3}
-        />
-        <bufferAttribute
-          attach="attributes-color"
-          count={count}
-          array={particlesColor}
-          itemSize={3}
-        />
-      </bufferGeometry>
+    <points ref={points} geometry={geometry}>
       <pointsMaterial
         size={0.1}
         vertexColors
@@ -117,15 +110,19 @@ function ParticleBackground({ count = 1000 }: ParticleBackgroundProps) {
 }
 
 // Connection lines between nearby particles
-function ParticleConnections({ count = 1000 }: ParticleBackgroundProps) {
+function ParticleConnections() {
   const lines = useRef<THREE.LineSegments>(null);
   
-  const { positions, colors } = useMemo(() => {
+  const geometry = useMemo(() => {
     const maxConnections = 50;
     const positions = new Float32Array(maxConnections * 6);
     const colors = new Float32Array(maxConnections * 6);
     
-    return { positions, colors };
+    const geo = new THREE.BufferGeometry();
+    geo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+    geo.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+    
+    return geo;
   }, []);
 
   useFrame((state) => {
@@ -139,21 +136,7 @@ function ParticleConnections({ count = 1000 }: ParticleBackgroundProps) {
   });
 
   return (
-    <lineSegments ref={lines}>
-      <bufferGeometry>
-        <bufferAttribute
-          attach="attributes-position"
-          count={positions.length / 3}
-          array={positions}
-          itemSize={3}
-        />
-        <bufferAttribute
-          attach="attributes-color"
-          count={colors.length / 3}
-          array={colors}
-          itemSize={3}
-        />
-      </bufferGeometry>
+    <lineSegments ref={lines} geometry={geometry}>
       <lineBasicMaterial
         vertexColors
         transparent
@@ -168,7 +151,7 @@ export default function ParticleSystem() {
   return (
     <group>
       <ParticleBackground count={1000} />
-      <ParticleConnections count={1000} />
+      <ParticleConnections />
     </group>
   );
 }
