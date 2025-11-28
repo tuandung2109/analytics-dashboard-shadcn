@@ -1,7 +1,9 @@
 import { NavigationProvider, useNavigation } from './contexts/NavigationContext';
+import { SidebarProvider } from './contexts/SidebarContext';
 import { Dashboard } from './components/Dashboard';
 import { Analytics } from './components/Analytics';
 import { GlobalNetwork } from './components/GlobalNetwork';
+import { KanbanBoard } from './components/KanbanBoard';
 
 function AppContent() {
   const { currentPage } = useNavigation();
@@ -14,6 +16,8 @@ function AppContent() {
         return <Analytics />;
       case 'reports':
         return <GlobalNetwork />;
+      case 'projects':
+        return <KanbanBoard />;
       case 'settings':
         return <Dashboard />; // Placeholder
       default:
@@ -27,7 +31,9 @@ function AppContent() {
 function App() {
   return (
     <NavigationProvider>
-      <AppContent />
+      <SidebarProvider>
+        <AppContent />
+      </SidebarProvider>
     </NavigationProvider>
   );
 }

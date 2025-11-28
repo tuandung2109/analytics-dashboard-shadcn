@@ -1,7 +1,7 @@
 import { createContext, useContext, useState } from 'react';
 import type { ReactNode } from 'react';
 
-type Page = 'dashboard' | 'analytics' | 'reports' | 'settings' | 'global-network';
+type Page = 'dashboard' | 'analytics' | 'reports' | 'projects' | 'settings' | 'global-network';
 
 interface NavigationContextType {
   currentPage: Page;

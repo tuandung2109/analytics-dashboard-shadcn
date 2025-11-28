@@ -7,6 +7,7 @@ import {
   BarChart3,
   Settings,
   Globe,
+  Kanban,
 } from 'lucide-react';
 import type { MenuItem, StatData, TableRow, ChartData } from '@/types';
 
@@ -29,6 +30,12 @@ export const sampleMenuItems: MenuItem[] = [
     label: 'Global Network',
     icon: Globe,
     href: '/reports',
+  },
+  {
+    id: 'projects',
+    label: 'Projects',
+    icon: Kanban,
+    href: '/projects',
   },
   {
     id: 'settings',
