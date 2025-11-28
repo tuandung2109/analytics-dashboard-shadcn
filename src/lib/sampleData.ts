@@ -6,7 +6,7 @@ import {
   LayoutDashboard,
   BarChart3,
   Settings,
-  FileText,
+  Globe,
 } from 'lucide-react';
 import type { MenuItem, StatData, TableRow, ChartData } from '@/types';
 
@@ -26,8 +26,8 @@ export const sampleMenuItems: MenuItem[] = [
   },
   {
     id: 'reports',
-    label: 'Reports',
-    icon: FileText,
+    label: 'Global Network',
+    icon: Globe,
     href: '/reports',
   },
   {

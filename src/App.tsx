@@ -1,6 +1,7 @@
 import { NavigationProvider, useNavigation } from './contexts/NavigationContext';
 import { Dashboard } from './components/Dashboard';
 import { Analytics } from './components/Analytics';
+import { GlobalNetwork } from './components/GlobalNetwork';
 
 function AppContent() {
   const { currentPage } = useNavigation();
@@ -12,7 +13,7 @@ function AppContent() {
       case 'analytics':
         return <Analytics />;
       case 'reports':
-        return <Dashboard />; // Placeholder
+        return <GlobalNetwork />;
       case 'settings':
         return <Dashboard />; // Placeholder
       default:
