@@ -14,8 +14,8 @@ export function UserProfileDropdown({ user }: UserProfileDropdownProps) {
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   const defaultUser = {
-    name: user?.name || 'John Doe',
-    email: user?.email || 'john.doe@example.com',
+    name: user?.name || 'Tuan Dung',
+    email: user?.email || 'tuandung2109@gmail.com',
     avatar: user?.avatar,
   };
 
