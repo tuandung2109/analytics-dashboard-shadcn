@@ -4,6 +4,7 @@ import { Dashboard } from './components/Dashboard';
 import { Analytics } from './components/Analytics';
 import { GlobalNetwork } from './components/GlobalNetwork';
 import { KanbanBoard } from './components/KanbanBoard';
+import { Settings } from './components/Settings';
 
 function AppContent() {
   const { currentPage } = useNavigation();
@@ -19,7 +20,7 @@ function AppContent() {
       case 'projects':
         return <KanbanBoard />;
       case 'settings':
-        return <Dashboard />; // Placeholder
+        return <Settings />;
       default:
         return <Analytics />;
     }
