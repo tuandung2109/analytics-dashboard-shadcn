@@ -152,24 +152,29 @@ export function Dashboard() {
         />
 
         <main className="p-6 space-y-6">
-          {/* Stats Grid */}
+          {/* Stats Grid with animations */}
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-            {dashboardStats.map((stat) => (
-              <StatCard
+            {dashboardStats.map((stat, index) => (
+              <div
                 key={stat.id}
-                title={stat.title}
-                value={stat.value}
-                icon={stat.icon}
-                trend={stat.trend}
-                description={stat.description}
-              />
+                className="animate-in fade-in slide-in-from-bottom-4"
+                style={{ animationDelay: `${index * 100}ms`, animationFillMode: 'backwards' }}
+              >
+                <StatCard
+                  title={stat.title}
+                  value={stat.value}
+                  icon={stat.icon}
+                  trend={stat.trend}
+                  description={stat.description}
+                />
+              </div>
             ))}
           </div>
 
           {/* Main Charts Row */}
           <div className="grid gap-4 lg:grid-cols-3">
             {/* Multi-Metric Composed Chart */}
-            <Card className="lg:col-span-2">
+            <Card className="lg:col-span-2 hover:shadow-2xl hover:shadow-purple-500/20 transition-all duration-300 hover:scale-[1.01] border-slate-700/50 backdrop-blur-sm bg-slate-900/80">
               <CardHeader>
                 <CardTitle>Business Performance Overview</CardTitle>
               </CardHeader>
@@ -212,7 +217,7 @@ export function Dashboard() {
             </Card>
 
             {/* Sales Funnel */}
-            <Card>
+            <Card className="hover:shadow-2xl hover:shadow-cyan-500/20 transition-all duration-300 hover:scale-[1.01] border-slate-700/50 backdrop-blur-sm bg-slate-900/80">
               <CardHeader>
                 <CardTitle>Conversion Funnel</CardTitle>
               </CardHeader>
@@ -235,7 +240,7 @@ export function Dashboard() {
           {/* Second Row */}
           <div className="grid gap-4 lg:grid-cols-2">
             {/* Scatter Plot - Customer Value Analysis */}
-            <Card>
+            <Card className="hover:shadow-2xl hover:shadow-purple-500/20 transition-all duration-300 hover:scale-[1.01] border-slate-700/50 backdrop-blur-sm bg-slate-900/80">
               <CardHeader>
                 <CardTitle>Customer Value vs Engagement</CardTitle>
               </CardHeader>
@@ -273,7 +278,7 @@ export function Dashboard() {
             </Card>
 
             {/* Device Trend Stacked Area */}
-            <Card>
+            <Card className="hover:shadow-2xl hover:shadow-green-500/20 transition-all duration-300 hover:scale-[1.01] border-slate-700/50 backdrop-blur-sm bg-slate-900/80">
               <CardHeader>
                 <CardTitle>Device Usage Trends</CardTitle>
               </CardHeader>
@@ -327,7 +332,7 @@ export function Dashboard() {
           {/* Third Row */}
           <div className="grid gap-4 lg:grid-cols-3">
             {/* Category Performance Treemap */}
-            <Card className="lg:col-span-2">
+            <Card className="lg:col-span-2 hover:shadow-2xl hover:shadow-blue-500/20 transition-all duration-300 hover:scale-[1.01] border-slate-700/50 backdrop-blur-sm bg-slate-900/80">
               <CardHeader>
                 <CardTitle>Product Category Performance</CardTitle>
               </CardHeader>
@@ -382,7 +387,7 @@ export function Dashboard() {
             </Card>
 
             {/* Real-time Activity Feed */}
-            <Card>
+            <Card className="hover:shadow-2xl hover:shadow-pink-500/20 transition-all duration-300 hover:scale-[1.01] border-slate-700/50 backdrop-blur-sm bg-slate-900/80">
               <CardHeader>
                 <CardTitle>Live Activity Feed</CardTitle>
               </CardHeader>
@@ -391,17 +396,18 @@ export function Dashboard() {
                   {recentActivities.map((activity, index) => (
                     <div
                       key={index}
-                      className="flex items-start gap-3 p-3 rounded-lg border bg-card hover:bg-accent/50 transition-colors"
+                      className="flex items-start gap-3 p-3 rounded-lg border bg-card hover:bg-accent/50 transition-all duration-300 hover:scale-[1.02] hover:shadow-lg hover:border-purple-500/50 cursor-pointer animate-in fade-in slide-in-from-right"
+                      style={{ animationDelay: `${index * 50}ms`, animationFillMode: 'backwards' }}
                     >
                       <div
-                        className={`w-2 h-2 rounded-full mt-2 ${
+                        className={`w-2 h-2 rounded-full mt-2 animate-pulse ${
                           activity.type === 'purchase'
-                            ? 'bg-green-500'
+                            ? 'bg-green-500 shadow-lg shadow-green-500/50'
                             : activity.type === 'signup'
-                              ? 'bg-blue-500'
+                              ? 'bg-blue-500 shadow-lg shadow-blue-500/50'
                               : activity.type === 'cart'
-                                ? 'bg-yellow-500'
-                                : 'bg-purple-500'
+                                ? 'bg-yellow-500 shadow-lg shadow-yellow-500/50'
+                                : 'bg-purple-500 shadow-lg shadow-purple-500/50'
                         }`}
                       />
                       <div className="flex-1 min-w-0">
@@ -423,7 +429,7 @@ export function Dashboard() {
 
           {/* Device Stats Cards */}
           <div className="grid gap-4 md:grid-cols-3">
-            <Card className="border-l-4 border-l-purple-500">
+            <Card className="border-l-4 border-l-purple-500 hover:shadow-2xl hover:shadow-purple-500/30 transition-all duration-300 hover:scale-105 hover:border-l-8 cursor-pointer group backdrop-blur-sm bg-slate-900/80">
               <CardContent className="pt-6">
                 <div className="flex items-center justify-between">
                   <div>
@@ -431,12 +437,12 @@ export function Dashboard() {
                     <p className="text-2xl font-bold">8,400</p>
                     <p className="text-xs text-muted-foreground mt-1">42% of total traffic</p>
                   </div>
-                  <Laptop className="h-12 w-12 text-purple-500 opacity-80" />
+                  <Laptop className="h-12 w-12 text-purple-500 opacity-80 group-hover:scale-110 group-hover:rotate-6 transition-all duration-300" />
                 </div>
               </CardContent>
             </Card>
 
-            <Card className="border-l-4 border-l-cyan-500">
+            <Card className="border-l-4 border-l-cyan-500 hover:shadow-2xl hover:shadow-cyan-500/30 transition-all duration-300 hover:scale-105 hover:border-l-8 cursor-pointer group backdrop-blur-sm bg-slate-900/80">
               <CardContent className="pt-6">
                 <div className="flex items-center justify-between">
                   <div>
@@ -444,12 +450,12 @@ export function Dashboard() {
                     <p className="text-2xl font-bold">15,200</p>
                     <p className="text-xs text-muted-foreground mt-1">51% of total traffic</p>
                   </div>
-                  <Smartphone className="h-12 w-12 text-cyan-500 opacity-80" />
+                  <Smartphone className="h-12 w-12 text-cyan-500 opacity-80 group-hover:scale-110 group-hover:rotate-6 transition-all duration-300" />
                 </div>
               </CardContent>
             </Card>
 
-            <Card className="border-l-4 border-l-green-500">
+            <Card className="border-l-4 border-l-green-500 hover:shadow-2xl hover:shadow-green-500/30 transition-all duration-300 hover:scale-105 hover:border-l-8 cursor-pointer group backdrop-blur-sm bg-slate-900/80">
               <CardContent className="pt-6">
                 <div className="flex items-center justify-between">
                   <div>
@@ -457,7 +463,7 @@ export function Dashboard() {
                     <p className="text-2xl font-bold">3,100</p>
                     <p className="text-xs text-muted-foreground mt-1">7% of total traffic</p>
                   </div>
-                  <Tablet className="h-12 w-12 text-green-500 opacity-80" />
+                  <Tablet className="h-12 w-12 text-green-500 opacity-80 group-hover:scale-110 group-hover:rotate-6 transition-all duration-300" />
                 </div>
               </CardContent>
             </Card>

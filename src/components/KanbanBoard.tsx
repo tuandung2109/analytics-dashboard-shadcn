@@ -158,12 +158,15 @@ export function KanbanBoard() {
           {/* Stats Cards */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
             {stats.map((stat, index) => (
-              <Card key={index} className="border-slate-700 bg-slate-900/50">
+              <Card 
+                key={index} 
+                className="border-slate-700 bg-slate-900/50 hover:shadow-2xl hover:shadow-purple-500/20 transition-all duration-300 hover:scale-105 cursor-pointer group"
+              >
                 <CardContent className="pt-6">
                   <div className="flex items-center justify-between">
                     <div>
                       <p className="text-sm text-slate-400">{stat.label}</p>
-                      <p className={`text-3xl font-bold ${stat.color}`}>{stat.value}</p>
+                      <p className={`text-3xl font-bold ${stat.color} group-hover:scale-110 transition-transform duration-300`}>{stat.value}</p>
                     </div>
                   </div>
                 </CardContent>
@@ -201,7 +204,7 @@ export function KanbanBoard() {
                       return (
                         <Card
                           key={task.id}
-                          className="border-slate-700 bg-slate-800/50 hover:bg-slate-800 transition-all cursor-pointer group"
+                          className="border-slate-700 bg-slate-800/50 hover:bg-slate-800 transition-all duration-300 cursor-pointer group hover:scale-[1.02] hover:shadow-xl hover:shadow-blue-500/20 hover:border-blue-500/50 animate-in fade-in slide-in-from-bottom-2"
                         >
                           <CardContent className="p-4">
                             {/* Task Header */}

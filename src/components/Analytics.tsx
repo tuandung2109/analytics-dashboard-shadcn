@@ -173,21 +173,26 @@ export function Analytics() {
         <main className="p-6 space-y-6">
           {/* Key Metrics Grid */}
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-            {advancedStats.map((stat) => (
-              <StatCard
+            {advancedStats.map((stat, index) => (
+              <div
                 key={stat.id}
-                title={stat.title}
-                value={stat.value}
-                icon={stat.icon}
-                trend={stat.trend}
-                description={stat.description}
-              />
+                className="animate-in fade-in slide-in-from-bottom-4"
+                style={{ animationDelay: `${index * 50}ms`, animationFillMode: 'backwards' }}
+              >
+                <StatCard
+                  title={stat.title}
+                  value={stat.value}
+                  icon={stat.icon}
+                  trend={stat.trend}
+                  description={stat.description}
+                />
+              </div>
             ))}
           </div>
 
           {/* Revenue & Growth Trends */}
           <div className="grid gap-4 lg:grid-cols-2">
-            <Card>
+            <Card className="hover:shadow-2xl hover:shadow-purple-500/20 transition-all duration-300 hover:scale-[1.01] border-slate-700/50 backdrop-blur-sm bg-slate-900/80">
               <CardHeader>
                 <CardTitle>Revenue Trend</CardTitle>
               </CardHeader>
@@ -222,7 +227,7 @@ export function Analytics() {
               </CardContent>
             </Card>
 
-            <Card>
+            <Card className="hover:shadow-2xl hover:shadow-cyan-500/20 transition-all duration-300 hover:scale-[1.01] border-slate-700/50 backdrop-blur-sm bg-slate-900/80">
               <CardHeader>
                 <CardTitle>Orders & Users Growth</CardTitle>
               </CardHeader>
@@ -262,7 +267,7 @@ export function Analytics() {
 
           {/* Traffic Sources & Device Breakdown */}
           <div className="grid gap-4 lg:grid-cols-3">
-            <Card className="lg:col-span-2">
+            <Card className="lg:col-span-2 hover:shadow-2xl hover:shadow-blue-500/20 transition-all duration-300 hover:scale-[1.01] border-slate-700/50 backdrop-blur-sm bg-slate-900/80">
               <CardHeader>
                 <CardTitle>Traffic Sources</CardTitle>
               </CardHeader>
@@ -285,7 +290,7 @@ export function Analytics() {
               </CardContent>
             </Card>
 
-            <Card>
+            <Card className="hover:shadow-2xl hover:shadow-green-500/20 transition-all duration-300 hover:scale-[1.01] border-slate-700/50 backdrop-blur-sm bg-slate-900/80">
               <CardHeader>
                 <CardTitle>Device Breakdown</CardTitle>
               </CardHeader>
@@ -315,7 +320,7 @@ export function Analytics() {
 
           {/* Performance Radar & Hourly Activity */}
           <div className="grid gap-4 lg:grid-cols-2">
-            <Card>
+            <Card className="hover:shadow-2xl hover:shadow-purple-500/20 transition-all duration-300 hover:scale-[1.01] border-slate-700/50 backdrop-blur-sm bg-slate-900/80">
               <CardHeader>
                 <CardTitle>Performance Metrics</CardTitle>
               </CardHeader>
@@ -338,7 +343,7 @@ export function Analytics() {
               </CardContent>
             </Card>
 
-            <Card>
+            <Card className="hover:shadow-2xl hover:shadow-cyan-500/20 transition-all duration-300 hover:scale-[1.01] border-slate-700/50 backdrop-blur-sm bg-slate-900/80">
               <CardHeader>
                 <CardTitle>Hourly Activity</CardTitle>
               </CardHeader>
@@ -369,7 +374,7 @@ export function Analytics() {
           </div>
 
           {/* Top Performers Table */}
-          <Card>
+          <Card className="hover:shadow-2xl hover:shadow-pink-500/20 transition-all duration-300 hover:scale-[1.01] border-slate-700/50 backdrop-blur-sm bg-slate-900/80">
             <CardHeader>
               <CardTitle>Top Performing Pages</CardTitle>
             </CardHeader>
@@ -384,7 +389,8 @@ export function Analytics() {
                 ].map((item, index) => (
                   <div
                     key={index}
-                    className="flex items-center justify-between p-4 rounded-lg border bg-card hover:bg-accent/50 transition-colors"
+                    className="flex items-center justify-between p-4 rounded-lg border bg-card hover:bg-accent/50 transition-all duration-300 hover:scale-[1.02] hover:shadow-lg hover:border-purple-500/50 cursor-pointer animate-in fade-in slide-in-from-left"
+                    style={{ animationDelay: `${index * 100}ms`, animationFillMode: 'backwards' }}
                   >
                     <div className="flex-1">
                       <p className="font-medium">{item.page}</p>
