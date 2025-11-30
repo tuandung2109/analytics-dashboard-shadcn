@@ -51,20 +51,38 @@ function getThreatColor(level: string) {
 
 function AttackArc({ attack }: { attack: Attack }) {
   const [progress, setProgress] = useState(0);
+  const particleRef = useRef<THREE.Mesh>(null);
   
+  // Memoize arc points to avoid recalculation
+  const { start, end, mid } = useMemo(() => {
+    const startPos = latLngToVector3(attack.source.lat, attack.source.lng, 2.5);
+    const endPos = latLngToVector3(attack.target.lat, attack.target.lng, 2.5);
+    const midPos = new THREE.Vector3()
+      .addVectors(startPos, endPos)
+      .multiplyScalar(0.5)
+      .normalize()
+      .multiplyScalar(3.5);
+    
+    return { start: startPos, end: endPos, mid: midPos };
+  }, [attack.source.lat, attack.source.lng, attack.target.lat, attack.target.lng]);
+
+  // Animate particle along the curve
   useFrame(() => {
     setProgress((prev) => (prev + 0.01) % 1);
+    
+    if (particleRef.current) {
+      // Smooth bezier curve interpolation
+      const t = progress;
+      const t2 = t * t;
+      const mt = 1 - t;
+      const mt2 = mt * mt;
+      
+      // Quadratic bezier formula: B(t) = (1-t)²P0 + 2(1-t)tP1 + t²P2
+      particleRef.current.position.x = mt2 * start.x + 2 * mt * t * mid.x + t2 * end.x;
+      particleRef.current.position.y = mt2 * start.y + 2 * mt * t * mid.y + t2 * end.y;
+      particleRef.current.position.z = mt2 * start.z + 2 * mt * t * mid.z + t2 * end.z;
+    }
   });
-
-  const start = latLngToVector3(attack.source.lat, attack.source.lng, 2.5);
-  const end = latLngToVector3(attack.target.lat, attack.target.lng, 2.5);
-  
-  // Calculate midpoint for arc
-  const mid = new THREE.Vector3()
-    .addVectors(start, end)
-    .multiplyScalar(0.5)
-    .normalize()
-    .multiplyScalar(3.5);
 
   return (
     <group>
@@ -78,7 +96,7 @@ function AttackArc({ attack }: { attack: Attack }) {
         opacity={0.6}
       />
       {/* Moving particle */}
-      <mesh position={new THREE.Vector3().lerpVectors(start, mid, progress * 2 > 1 ? 1 : progress * 2).lerp(end, progress * 2 > 1 ? (progress * 2 - 1) : 0)}>
+      <mesh ref={particleRef}>
         <sphereGeometry args={[0.04, 8, 8]} />
         <meshBasicMaterial color="#ff0000" />
       </mesh>

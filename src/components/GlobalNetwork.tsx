@@ -67,16 +67,21 @@ export function GlobalNetwork() {
     return () => clearInterval(interval);
   }, []);
 
-  // Threat nodes around the world
+  // Threat nodes around the world - EXPANDED
   const nodes: AttackNode[] = [
-    // Attack sources (red/orange)
+    // Attack sources (red/orange) - More threat locations
     { id: 'mos', city: 'Moscow', country: 'Russia', lat: 55.7558, lng: 37.6173, type: 'source', threatLevel: 'critical' },
     { id: 'bei', city: 'Beijing', country: 'China', lat: 39.9042, lng: 116.4074, type: 'source', threatLevel: 'critical' },
     { id: 'pyo', city: 'Pyongyang', country: 'N. Korea', lat: 39.0392, lng: 125.7625, type: 'source', threatLevel: 'high' },
     { id: 'teh', city: 'Tehran', country: 'Iran', lat: 35.6892, lng: 51.3890, type: 'source', threatLevel: 'high' },
     { id: 'buc', city: 'Bucharest', country: 'Romania', lat: 44.4268, lng: 26.1025, type: 'source', threatLevel: 'medium' },
+    { id: 'sha', city: 'Shanghai', country: 'China', lat: 31.2304, lng: 121.4737, type: 'source', threatLevel: 'critical' },
+    { id: 'stpete', city: 'St Petersburg', country: 'Russia', lat: 59.9343, lng: 30.3351, type: 'source', threatLevel: 'high' },
+    { id: 'kar', city: 'Karachi', country: 'Pakistan', lat: 24.8607, lng: 67.0011, type: 'source', threatLevel: 'medium' },
+    { id: 'lag', city: 'Lagos', country: 'Nigeria', lat: 6.5244, lng: 3.3792, type: 'source', threatLevel: 'medium' },
+    { id: 'vnz', city: 'Caracas', country: 'Venezuela', lat: 10.4806, lng: -66.9036, type: 'source', threatLevel: 'medium' },
     
-    // Protected targets (green/blue)
+    // Protected targets (green/blue) - More cities
     { id: 'nyc', city: 'New York', country: 'USA', lat: 40.7128, lng: -74.0060, type: 'target', threatLevel: 'low' },
     { id: 'sfo', city: 'San Francisco', country: 'USA', lat: 37.7749, lng: -122.4194, type: 'target', threatLevel: 'low' },
     { id: 'lon', city: 'London', country: 'UK', lat: 51.5074, lng: -0.1278, type: 'target', threatLevel: 'low' },
@@ -85,15 +90,56 @@ export function GlobalNetwork() {
     { id: 'tok', city: 'Tokyo', country: 'Japan', lat: 35.6762, lng: 139.6503, type: 'target', threatLevel: 'low' },
     { id: 'syd', city: 'Sydney', country: 'Australia', lat: -33.8688, lng: 151.2093, type: 'target', threatLevel: 'low' },
     { id: 'sin', city: 'Singapore', country: 'Singapore', lat: 1.3521, lng: 103.8198, type: 'target', threatLevel: 'low' },
+    { id: 'sea', city: 'Seattle', country: 'USA', lat: 47.6062, lng: -122.3321, type: 'target', threatLevel: 'low' },
+    { id: 'tor', city: 'Toronto', country: 'Canada', lat: 43.6532, lng: -79.3832, type: 'target', threatLevel: 'low' },
+    { id: 'ams', city: 'Amsterdam', country: 'Netherlands', lat: 52.3676, lng: 4.9041, type: 'target', threatLevel: 'low' },
+    { id: 'seo', city: 'Seoul', country: 'S. Korea', lat: 37.5665, lng: 126.9780, type: 'target', threatLevel: 'medium' },
+    { id: 'mum', city: 'Mumbai', country: 'India', lat: 19.0760, lng: 72.8777, type: 'target', threatLevel: 'medium' },
+    { id: 'sau', city: 'São Paulo', country: 'Brazil', lat: -23.5505, lng: -46.6333, type: 'target', threatLevel: 'medium' },
+    { id: 'dub', city: 'Dubai', country: 'UAE', lat: 25.2048, lng: 55.2708, type: 'target', threatLevel: 'low' },
   ];
 
-  // Simulated attacks
+  // Simulated attacks - MANY MORE CONNECTIONS
   const attacks: Attack[] = [
-    { id: '1', source: nodes[0], target: nodes[5], type: 'DDoS', progress: 0 },
-    { id: '2', source: nodes[1], target: nodes[6], type: 'Malware', progress: 0 },
-    { id: '3', source: nodes[2], target: nodes[10], type: 'Brute Force', progress: 0 },
-    { id: '4', source: nodes[3], target: nodes[7], type: 'SQL Injection', progress: 0 },
-    { id: '5', source: nodes[0], target: nodes[9], type: 'XSS', progress: 0 },
+    // From Moscow
+    { id: '1', source: nodes[0], target: nodes[10], type: 'DDoS', progress: 0 },
+    { id: '2', source: nodes[0], target: nodes[14], type: 'Malware', progress: 0 },
+    { id: '3', source: nodes[0], target: nodes[18], type: 'Ransomware', progress: 0 },
+    
+    // From Beijing
+    { id: '4', source: nodes[1], target: nodes[11], type: 'Malware', progress: 0 },
+    { id: '5', source: nodes[1], target: nodes[15], type: 'APT', progress: 0 },
+    { id: '6', source: nodes[1], target: nodes[19], type: 'Espionage', progress: 0 },
+    
+    // From Shanghai
+    { id: '7', source: nodes[5], target: nodes[12], type: 'Phishing', progress: 0 },
+    { id: '8', source: nodes[5], target: nodes[17], type: 'Data Breach', progress: 0 },
+    
+    // From Pyongyang
+    { id: '9', source: nodes[2], target: nodes[15], type: 'Brute Force', progress: 0 },
+    { id: '10', source: nodes[2], target: nodes[21], type: 'Crypto Mining', progress: 0 },
+    
+    // From Tehran
+    { id: '11', source: nodes[3], target: nodes[12], type: 'SQL Injection', progress: 0 },
+    { id: '12', source: nodes[3], target: nodes[24], type: 'DDoS', progress: 0 },
+    
+    // From St Petersburg
+    { id: '13', source: nodes[6], target: nodes[20], type: 'XSS', progress: 0 },
+    { id: '14', source: nodes[6], target: nodes[13], type: 'Trojan', progress: 0 },
+    
+    // From Bucharest
+    { id: '15', source: nodes[4], target: nodes[16], type: 'Botnet', progress: 0 },
+    { id: '16', source: nodes[4], target: nodes[22], type: 'Malware', progress: 0 },
+    
+    // From Karachi
+    { id: '17', source: nodes[7], target: nodes[17], type: 'Phishing', progress: 0 },
+    
+    // From Lagos
+    { id: '18', source: nodes[8], target: nodes[23], type: 'Scam', progress: 0 },
+    
+    // From Caracas
+    { id: '19', source: nodes[9], target: nodes[10], type: 'Ransomware', progress: 0 },
+    { id: '20', source: nodes[9], target: nodes[23], type: 'DDoS', progress: 0 },
   ];
 
   const stats = [
